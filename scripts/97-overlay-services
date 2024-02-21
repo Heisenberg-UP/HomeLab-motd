@@ -1,0 +1,53 @@
+#!/bin/sh
+
+# Script checks that select services are running
+
+
+# Function for turning active services green and other services red
+print_status() {
+    if [ "$1" = "active" ]; then
+        echo "\033[0;32m$1\033[0m"  # Dark green for active
+    else
+        echo "\033[1;31m$1\033[0m"  # Deep red for inactive
+    fi
+}
+
+
+# Variables
+
+# Email relay
+POSTFIX="$(sudo systemctl status postfix@-.service | awk '/Active:/ {print $2}')" # Find out service status
+postfix=$(print_status $POSTFIX) # Change color according to status
+
+# Security updates
+UNATTENDED_UPGRADES="$(sudo systemctl status unattended-upgrades.service | awk '/Active:/ {print $2}')" # Find out service status
+unattended_upgrades=$(print_status $UNATTENDED_UPGRADES) # Change color according to status
+
+# Security Service for IP banning
+FAIL2BAN="$(sudo systemctl status fail2ban | awk '/Active:/ {print $2}')" # Find out service status
+fail2ban=$(print_status $FAIL2BAN) # Change color according to status
+
+# Networking service which is support by Netplan
+SYSTEM_NETWORK="$(sudo systemctl status systemd-networkd | awk '/Active:/ {print $2}')" # Find out service status
+system_network=$(print_status $SYSTEM_NETWORK) # Change color according to status
+
+# DNS resolver for server 
+SYSTEM_RESOLVED="$(sudo systemctl status systemd-resolved | awk '/Active:/ {print $2}')" # Find out service status
+system_resolved=$(print_status $SYSTEM_RESOLVED) # Change color according to status
+
+# NAS Service
+SAMBA="$(sudo systemctl status smbd | awk '/Active:/ {print $2}')" # Find out service status
+samba=$(print_status $SAMBA)
+
+
+(egrep "overlayroot|/media/root-ro|/media/root-rw" /proc/mounts 2>/dev/null | sort -r) || true # Honestly, I dont know what this does
+echo # Spacing
+echo "\033[1;32mPrimary Services\033[0m:" # Header
+echo # Spacing
+echo "\033[1;35m*\033[0m \033[1;32mFail2Ban\033[0m:\t\t$fail2ban" # Fail2ban service
+echo "\033[1;35m*\033[0m \033[1;32mNetworkd\033[0m:\t\t$system_network" # Networkd service
+echo "\033[1;35m*\033[0m \033[1;32mPostfix\033[0m:\t\t$postfix" # Postfix service
+echo "\033[1;35m*\033[0m \033[1;32mResolved\033[0m:\t\t$system_resolved" # Resolved service
+echo "\033[1;35m*\033[0m \033[1;32mSamba\033[0m:\t\t$samba" # Samba service
+echo "\033[1;35m*\033[0m \033[1;32mUnattended-upgrades\033[0m:\t$unattended_upgrades" # Unattended services upgrade
+echo
