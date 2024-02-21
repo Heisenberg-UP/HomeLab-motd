@@ -8,8 +8,8 @@ Repository contains customized bash scripts for the update-motd.d/ folder. These
                 
 README.md - Contains description of repository, image of message of the day, and notes about installation                
 LICENSE - GNU General Public License v3.0    
-scripts folder:
-        00-header - Bash file that prints server name and distribution information      
+scripts folder:    
+00-header - Bash file that prints server name and distribution information      
         10-help-text - Bash file that prints important documentation links    
         50-custom-landscape - Bash file that mimics the landscape-sysinfo command on Ubuntu at a low level    
         97-overlay-services - Bash file that checks if services and are active or inactive and relays their status    
