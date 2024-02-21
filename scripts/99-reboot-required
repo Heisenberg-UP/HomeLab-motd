@@ -1,0 +1,10 @@
+#!/bin/sh -e
+
+# Script checks if a reboot-require file exists and if it does
+# the contents of the file will be printed
+
+
+# if statement checking if file exists
+if [ -f /var/run/reboot-required ]; then
+        printf "\033[1;35m$(cat /var/run/reboot-required)\033[0m\n"
+fi
