@@ -6,11 +6,12 @@ Repository contains customized bash scripts for the update-motd.d/ folder. These
 
 **Contents**                
 
-README.md - Contains description of repository, image of message of the day, and notes about installation                
 
-LICENSE - GNU General Public License v3.0      
+	README.md - Contains description of repository, image of message of the day, and notes about installation                
 
-scripts folder:  
+	LICENSE - GNU General Public License v3.0      
+
+	scripts folder:  
 		
 		00-header - Bash file that prints server name and distribution information      
 		10-help-text - Bash file that prints important documentation links    
