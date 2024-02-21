@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Script will use /usr/lib/update-notifier/apt-check to see the total number of updates available 
+# and the number of security updates available.
+
+# Run the apt-check script and send output to stderr
+updates=$(sudo /usr/lib/update-notifier/apt-check 2>&1)
+
+# Extract total updates and security updates
+updates_total=$(echo "$updates" | cut -d ';' -f1)
+updates_security=$(echo "$updates" | cut -d ';' -f2)
+
+# Check if updates_total is 0
+if [ "$updates_total" -eq 0 ]; then
+    printf "%s \033[1;35mupdates available\033[0m\n\n" "$updates_total"
+else
+    printf "%s \033[1;35mupdates available,\033[0m %s \033[1;35mof which are security updates.\033[0m\n\n" "$updates_total" "$updates_security"
+fi
