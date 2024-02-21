@@ -43,11 +43,12 @@ sudo ln -s ~/personalized-motd/97-overlay-services
 sudo ln -s ~/personalized-motd/98-updates-available
 sudo ln -s ~/personalized-motd/99-reboot-required
 ```
-4.a) Edit the 00-header file to print your server name. Change HomeLab to whatever you want. Look for the line:
+4. Edit the 00-header file to print your server name. Change HomeLab to whatever you want. Look for the line:
 ```bash
 text="HomeLab" # Server name
 ```
-5.a) Edit the 97-overlay-services file to check for the status of your services, and then print those services along with their status. To accomplish this you need to alter the variables to look up the services you are hosting or monitoring.
+5.a) Edit the 97-overlay-services file to check for the status of your services, and then print those services along with their status. To accomplish this you need to alter the variables 
+     to look up the services you are hosting or monitoring.
 ```bash
 SAMBA="$(sudo systemctl status smbd | awk '/Active:/ {print $2}')" # Find out service status
 samba=$(print_status $SAMBA)
