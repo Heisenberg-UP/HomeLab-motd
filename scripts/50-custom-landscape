@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# Custom-landscape is supposed to mimic the landscape-sysinfo command on Ubuntu at a lower level.
+# Landscape-sysinfo is a great package written in python and has numerous features. This script
+# is a very low level copy of the landscape-sysinfo command. I wanted this info in my personal-motd
+
+# Variables
+system_load=$(cat /proc/loadavg | cut -d' ' -f1-3) # Collects system load values in 1, 5, and 15 minute averages
+
+temperature=$(cat /sys/class/thermal/thermal_zone0/temp) # Collects CPU temp in mili Celcsius
+
+temperature=$(echo "scale=1; $temperature / 1000" | bc) # Convert temperature from millidegrees Celsius to degrees Celsius
+
+disk_usage=$(df -h / | awk 'NR==2{print $5}') # Calculates disk usage from / directory
+
+process=$(ps aux --no-headers | wc -l) # Calculates the number of current processes
+
+memory=$(free -m | awk 'NR==2{print $3}') # Collects the active memory in MB
+memory_percent=$(awk "BEGIN {printf \"%.2f\", ($memory / 1024 / 3.7) * 100}") # Convert memory usage into a percent
+
+users=$(who | wc -l) # Assigns the current number of users
+
+swap=$(free -m | awk 'NR==3{print $3}') # Calculates total swap usage
+swap_percent=$(awk "BEGIN {printf \"%.2f\", ($swap / 1024 / 1) * 100}") # Convert swap usage into a percent
+
+interfaces=$(netplan status --all | grep -E 'UP.*eth|UP.*wlan' | awk '{print $3}' | head -n 1) # Returns interfaces that are up
+ip=$(hostname -I | cut -d' ' -f1) # Finds the IPv4 "LAN FACING IP"
+
+# Print information
+printf "\n" # New line for spacing
+
+printf "\033[1;32mSystem information as of $(date)\033[0m\n\n" # Prints date before display system information
+
+# Display System load and temperature next to eachother
+printf "\033[1;35m*\033[0m \033[1;32mSystem load\033[0m: $system_load\t\033[1;35m*\033[0m \033[1;32mTemperature\033[0m: $temperature C\n"
+
+# Display disk usage and processes 
+printf '\033[1;35m*\033[0m \033[1;32mUsage of /\033[0m: %s of 917GB\t\033[1;35m*\033[0m \033[1;32mProcesses\033[0m: %s\n' "$disk_usage" "$process"
+
+# Display active memory and active swap
+printf "\033[1;35m*\033[0m \033[1;32mMemory usage\033[0m: $memory_percent%% \t\t\033[1;35m*\033[0m \033[1;32mSwap usage\033[0m: $swap_percent%%\n"
+
+# Display Users and local IP address
+printf "\033[1;35m*\033[0m \033[1;32mInterfaces\033[0m: $interfaces\t\t\033[1;35m*\033[0m \033[1;32mIPv4\033[0m: $ip\n"
