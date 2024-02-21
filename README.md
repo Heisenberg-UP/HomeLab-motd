@@ -47,7 +47,7 @@ Repository contains customized bash scripts for the update-motd.d/ folder. These
 	```bash
 	text="HomeLab" # Server name
 	```
-5. Edit the 97-overlay-services file to check and print the status of your services. To accomplish this you need to alter the variables to look up the services you are hosting or monitoring. You will also need to edit the echo commands to echo the correct service name and the correct service status.
+5. Edit the 97-overlay-services file to check and print the status of your services. To accomplish this you need to alter the variables to look up the services you are hosting or monitoring. You will also need to edit the echo commands to echo the correct service name and the correct service status. Below is an example of how the lines of code should look. You will need to edit every variable in this file.
 	```bash
 	SAMBA="$(sudo systemctl status smbd | awk '/Active:/ {print $2}')" # Find out service status
 	samba=$(print_status $SAMBA)
@@ -61,6 +61,10 @@ Repository contains customized bash scripts for the update-motd.d/ folder. These
 	```
 
 
-**Disclaimer**
+
+
+
+      	
+**Disclaimer**		
 Please edit, destroy, delete, build upon, or whatever you like with this repository! However, be aware that I am a novice at linux and bash scripting. I will not be able to lend a helping hand with any high level issues. I am providing this repository because I think my motd is cool and I want other people to be able to use it if they would like.
 
