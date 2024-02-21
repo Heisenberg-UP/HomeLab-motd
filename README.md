@@ -24,24 +24,24 @@ Repository contains customized bash scripts for the update-motd.d/ folder. These
 
 1. Clone the repository to your ~/ folder. We will change the permissions since root will be handling your motd when you login.
 ```bash
-sudo git clone https://github.com/Heisenberg-UP/personalized-motd
-cd personalized-motd && sudo chmod 755 * && sudo chown root:root
+git clone https://github.com/Heisenberg-UP/personalized-motd
+cd personalized-motd/scripts/ && sudo chmod 755 * && sudo chown root:root *
 ```
 2. Make a copy of the original motd scripts provided by Ubuntu for safe keeping. We will change the permissions so the original scripts are no longer executable.
 ```bash
 mkdir original-motd && chmod 700 original-motd/
-sudo cp /etc/update-motd.d/* ~/personalized-motd/original-motd/ && sudo chmod 644 ~/personalized-motd/original-motd/*
+sudo cp /etc/update-motd.d/* ~/personalized-motd/scripts/original-motd/ && sudo chmod 644 ~/personalized-motd/scripts/original-motd/*
 sudo rm /etc/update-motd.d/*
 ```
 3. Symbolically link personalized scripts to the root motd folder.
 ```bash
 cd /etc/update-motd.d/
-sudo ln -s ~/personalized-motd/00-header
-sudo ln -s ~/personalized-motd/10-help-text
-sudo ln -s ~/personalized-motd/50-custom-landscape
-sudo ln -s ~/personalized-motd/97-overlay-services
-sudo ln -s ~/personalized-motd/98-updates-available
-sudo ln -s ~/personalized-motd/99-reboot-required
+sudo ln -s ~/personalized-motd/scripts/00-header
+sudo ln -s ~/personalized-motd/scripts/10-help-text
+sudo ln -s ~/personalized-motd/scripts/50-custom-landscape
+sudo ln -s ~/personalized-motd/scripts/97-overlay-services
+sudo ln -s ~/personalized-motd/scripts/98-updates-available
+sudo ln -s ~/personalized-motd/scripts/99-reboot-required
 ```
 4. Edit the 00-header file to print your server name. Change HomeLab to whatever you want. Look for the line:
 ```bash
