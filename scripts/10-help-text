@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# Help-text script wil print various links to generally helpful websites maintained by Ubuntu or trusted third-party
+# companies that work with Ubuntu
+
+printf "\n" # Spacing line
+
+printf "\033[1;35m*\033[0m \033[1;32mDocumentation\033[0m:  https://help.ubuntu.com\n" # Documentation website
+
+printf "\033[1;35m*\033[0m \033[1;32mManagement\033[0m:     https://landscape.canonical.com\n" # Management website with software, 
+                                                                                               # this is where your Ubuntu updates 
+                                                                                               # come from
+
+printf "\033[1;35m*\033[0m \033[1;32mSupport\033[0m:        https://ubuntu.com/advantage\n" # I believe this is for serious 
+                                                                                            # enterprise use of Ubuntu
+                                                                                            # *paid subscription shit*
