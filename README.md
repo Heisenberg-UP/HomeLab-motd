@@ -11,7 +11,7 @@ Repository contains customized bash scripts for the update-motd.d/ folder. These
 
 	LICENSE - GNU General Public License v3.0      
 
-	scripts folder:  
+	scripts/:  
 		
 		00-header - Bash file that prints server name and distribution information      
 		10-help-text - Bash file that prints important documentation links    
@@ -19,3 +19,29 @@ Repository contains customized bash scripts for the update-motd.d/ folder. These
 		97-overlay-services - Bash file that checks if services and are active or inactive and relays their status    
 		98-updates-available - Bash file that checks if there are any updates available and how many of them are security updates    
  		99-reboot-required - Bash file sees if a system reboot is required    
+
+**Installation**		
+
+1. Clone the repository to your ~/ folder. We will change the permissions since root will be handling your motd when you login.
+```bash
+sudo git clone https://github.com/Heisenberg-UP/personalized-motd
+cd personalized-motd && sudo chmod 755 * && sudo chown root:root
+```
+2. Make a copy of the original motd scripts provided by Ubuntu for safe keeping. We will change the permissions so the original scripts are no longer executable.
+```bash
+mkdir original-motd && chmod 700 original-motd/
+sudo cp /etc/update-motd.d/* ~/personalized-motd/original-motd/ && sudo chmod 644 ~/personalized-motd/original-motd/*
+sudo rm /etc/update-motd.d/*
+```
+3. Symbolically link personalized scripts to the root motd folder.
+```bash
+cd /etc/update-motd.d/
+sudo ln -s ~/personalized-motd/00-header
+sudo ln -s ~/personalized-motd/10-help-text
+sudo ln -s ~/personalized-motd/50-custom-landscape
+sudo ln -s ~/personalized-motd/97-overlay-services
+sudo ln -s ~/personalized-motd/98-updates-available
+sudo ln -s ~/personalized-motd/99-reboot-required
+```
+4. 
+
