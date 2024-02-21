@@ -60,11 +60,9 @@ Repository contains customized bash scripts for the update-motd.d/ folder. These
 	sudo run-parts /etc/update-motd.d/
 	```		
 
-	
 
-			
 
-      	
-	**Disclaimer**				
+
+**Disclaimer**				
 Please edit, destroy, delete, build upon, or whatever you like with this repository! However, be aware that I am a novice at linux and bash scripting. I will not be able to lend a helping hand with any high level issues. I am providing this repository because I think my motd is cool and I want other people to be able to use it if they would like.
 
