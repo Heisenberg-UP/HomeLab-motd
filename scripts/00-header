@@ -1,0 +1,20 @@
+#!/bin/sh
+
+# Header script which will show the name of the server in figlet slant
+# Header will also show the distribution description
+
+[ -r /etc/lsb-release ] && . /etc/lsb-release
+
+if [ -z "$DISTRIB_DESCRIPTION" ] && [ -x /usr/bin/lsb_release ]; then
+	# Fall back to using the very slow lsb_release utility
+	DISTRIB_DESCRIPTION=$(lsb_release -s -d)
+fi
+
+text="HomeLab" # Server name
+figlet_title=$(figlet -f slant "$text") # Figlet slant text of server name
+purple_figlet="\033[1;35m$figlet_title\033[0m" # Colors figlet text purple
+echo
+echo "$purple_figlet" # Prints server name 
+echo
+
+echo "\033[1;32m"$DISTRIB_DESCRIPTION" "$(uname -o)" "$(uname -r)" "$(uname -m)"\033[0m" # Print distribution information
