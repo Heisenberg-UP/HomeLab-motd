@@ -47,13 +47,12 @@ sudo ln -s ~/personalized-motd/99-reboot-required
 ```bash
 text="HomeLab" # Server name
 ```
-5.a) Edit the 97-overlay-services file to check for the status of your services, and then print those services along with their status. To accomplish this you need to alter the variables 
-     to look up the services you are hosting or monitoring.
+5.a Edit the 97-overlay-services file to check and print the status of your services. To accomplish this you need to alter the variables to look up the services you are hosting or monitoring.
 ```bash
 SAMBA="$(sudo systemctl status smbd | awk '/Active:/ {print $2}')" # Find out service status
 samba=$(print_status $SAMBA)
 ```
-5.b) You will also need to change the echo commands to print your correct service name in the 97-overlay-service file.
+5.b You will also need to change the echo commands to print your correct service name in the 97-overlay-service file.
 ```bash
 echo "\033[1;35m*\033[0m \033[1;32mSamba\033[0m:\t\t$samba" # Samba service
 ```
@@ -62,4 +61,7 @@ echo "\033[1;35m*\033[0m \033[1;32mSamba\033[0m:\t\t$samba" # Samba service
 sudo run-parts /etc/update-motd.d/
 ```
 
+
+**Disclaimer**
+Please edit, destroy, delete, build upon, or whatever you like with this repository! However, be aware that I am a novice at linux and bash scripting. I will not be able to lend a helping hand with any high level issues. I am providing this repository because I think my motd is cool and I want other people to be able to use it if they would like.
 
