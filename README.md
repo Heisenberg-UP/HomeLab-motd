@@ -4,9 +4,9 @@ Repository contains customized bash scripts for the update-motd.d/ folder. These
 
 ![Screenshot 2024-02-21 at 11 05 59 AM](https://github.com/Heisenberg-UP/personalized-motd/assets/99283516/cdead9f4-4906-4883-921f-4492c5a9ff85)
 
-** Contents ** 
-
-README.md - Contains description of repository, image of message of the day, and notes about installation\n
+**Contents**                
+                
+README.md - Contains description of repository, image of message of the day, and notes about installation\n                
 LICENSE - GNU General Public License v3.0\n
 scripts/\n
         00-header - Bash file that prints server name and distribution information\n
